@@ -1,6 +1,6 @@
  //eslint no-restricted-globals: 'off' 
- console.log('now')
-//Iteration 1: All rates average - Get the average of all rates with 2 decimals 
+console.log ("lolo")
+ //Iteration 1: All rates average - Get the average of all rates with 2 decimals 
  
 // Iteration 2: Drama movies - Get the average of Drama Movies
 
