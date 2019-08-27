@@ -1,5 +1,7 @@
  //eslint no-restricted-globals: 'off' 
-
+ function lala(){
+   console.log('hi')
+ }
 //Iteration 1: All rates average - Get the average of all rates with 2 decimals 
  
 // Iteration 2: Drama movies - Get the average of Drama Movies
