@@ -61,7 +61,6 @@ function orderByDuration(film){
   })
   return filmSeconds
 }
-
 // Iteration 4: Steven Spielberg. The best? - How many movies did STEVEN SPIELBERG direct
 function howManyMovies(films){
 let spielbergDrama = dramaMap(films)
@@ -69,9 +68,22 @@ let spielbergDrama = dramaMap(films)
 .filter(elem=>elem!==null)
 return spielbergDrama.length
 }
-
 // Iteration 5: Alphabetic Order - Order by title and print the first 20 titles
+function orderAlphabetically(films){
+  let orderedFilms = films.sort(function order(a,b){
+    if(a.title>b.title){
+      return 1
+    }
+    if(a.title<b.title){
+      return -1
+    }
+    else return 0
+  }).map(film=>film.title)
 
+  console.log('splices', orderedFilms.splice(20))
+  
+return orderedFilms.length>20?orderedFilms.splice(20):orderedFilms
+}
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
 
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
