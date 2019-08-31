@@ -79,10 +79,8 @@ function orderAlphabetically(films){
     }
     else return 0
   }).map(film=>film.title)
-
-  console.log('splices', orderedFilms.splice(20))
-  
-return orderedFilms.length>20?orderedFilms.splice(20):orderedFilms
+  orderedFilms.length>20?orderedFilms.splice(20):orderedFilms
+  return orderedFilms
 }
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
 
