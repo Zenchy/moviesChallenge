@@ -1,8 +1,8 @@
  //eslint no-restricted-globals: 'off' 
 //Usefull methods
 
- function dramaMap(movies){
- let dramaped = movies.map(movie=>movie.genre.includes("Drama")?movie.rate:null).filter(elem=>elem!==null)
+ function dramaMapRate(movies){
+ let dramaped = movies.map(movie=>movie.genre.includes('Drama')?movie.rate:null).filter(elem=>elem!==null)
  return dramaped.length===0?[0]:dramaped
 }
 
@@ -20,7 +20,12 @@ function stringToSeconds(stringTime){
     let min= parseInt(numberTime[1].split('min')[0]?numberTime[1].split('min')[0]:0)
     stringTime.duration = hours*60+min 
     return stringTime
+  }
 }
+
+function dramaMap(films){
+let dramaFilms = films.map(film=>film.genre.includes('Drama')?film:null).filter(elem=>elem!==null)
+return dramaFilms.length===0?[0]:dramaFilms
 }
 
 //Iteration 1: All rates average - Get the average of all rates with 2 decimals 
@@ -30,8 +35,8 @@ function ratesAverage(movies){
   }
 // Iteration 2: Drama movies - Get the average of Drama Movies
 function dramaMoviesRate(movies){
-  let dramaRate = dramaMap(movies).reduce((acum, dramaRate) => acum+dramaRate)
-  let aveDrama = dramaRate/dramaMap(movies).length
+  let dramaRate = dramaMapRate(movies).reduce((acum, dramaRate) => acum+dramaRate)
+  let aveDrama = dramaRate/dramaMapRate(movies).length
 return roundDecimals(aveDrama, 2)
 }
 // Iteration 3: Ordering by duration - Order by time duration, ascending (in growing order)
@@ -58,7 +63,12 @@ function orderByDuration(film){
 }
 
 // Iteration 4: Steven Spielberg. The best? - How many movies did STEVEN SPIELBERG direct
-
+function howManyMovies(films){
+let spielbergDrama = dramaMap(films)
+.map(dramaMovie=>dramaMovie.director==='Steven Spielberg'?dramaMovie:null)
+.filter(elem=>elem!==null)
+return spielbergDrama.length
+}
 
 // Iteration 5: Alphabetic Order - Order by title and print the first 20 titles
 
