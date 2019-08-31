@@ -11,10 +11,27 @@ function roundDecimals(numToRound, numberOfDecimals){
   return Math.round(numToRound*Math.pow(10,numberOfDecimals))/Math.pow(10,numberOfDecimals)
 }
 
+function filmDuration(film){
+  return film
+}
+
 function stringToSeconds(stringTime){
+
   if(typeof(stringTime.duration)==='number'){
     return stringTime
-  } else {
+  }
+  if(!stringTime.duration.includes('h')){
+    stringTime.duration = parseInt(stringTime.duration.split('min'))
+    return stringTime
+  }
+  if(stringTime.duration.includes('0h')){
+    let numberTime = stringTime.duration.replace(/\s/g,'').split('h')
+    let hours= parseInt(numberTime)
+    let min= parseInt(numberTime[1].split('min')[0]?numberTime[1].split('min')[0]:0)
+    stringTime.duration = hours*60+min 
+    return stringTime
+  }
+  else {
     let numberTime = stringTime.duration.replace(/\s/g,'').split('h')
     let hours= parseInt(numberTime)
     let min= parseInt(numberTime[1].split('min')[0]?numberTime[1].split('min')[0]:0)
@@ -26,6 +43,10 @@ function stringToSeconds(stringTime){
 function dramaMap(films){
 let dramaFilms = films.map(film=>film.genre.includes('Drama')?film:null).filter(elem=>elem!==null)
 return dramaFilms.length===0?[0]:dramaFilms
+}
+
+function toSeconds(film){ 
+  return stringToSeconds(film)
 }
 
 //Iteration 1: All rates average - Get the average of all rates with 2 decimals 
@@ -83,5 +104,17 @@ function orderAlphabetically(films){
   return orderedFilms
 }
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
-
+function turnHoursToMinutes(films){
+  let arrDur = films.map(film=>typeof(film.duration)==='number'?film:toSeconds(film))
+  arrDur.sort(function order(a,b){
+    if(a.duration>b.duration){
+      return 1
+    }
+    if(a.duration<b.duration){
+      return -1
+    }
+    return 0
+  })
+  return arrDur
+}
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
