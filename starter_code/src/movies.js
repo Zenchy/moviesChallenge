@@ -63,7 +63,7 @@ return roundDecimals(aveDrama, 2)
 // Iteration 3: Ordering by duration - Order by time duration, ascending (in growing order)
 function orderByDuration(film){
   let filmSeconds=film.map(movie =>stringToSeconds(movie));
-  filmSeconds = filmSeconds.sort(function compare(a, b) {
+  filmSeconds = filmSeconds.sort((a, b) =>{
     if (a.duration<b.duration) {
       return -1;
     }
@@ -106,7 +106,7 @@ function orderAlphabetically(films){
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(films){
   let arrDur = films.map(film=>typeof(film.duration)==='number'?film:toSeconds(film))
-  arrDur.sort(function order(a,b){
+  arrDur.sort((a,b)=>{
     if(a.duration>b.duration){
       return 1
     }
@@ -118,3 +118,38 @@ function turnHoursToMinutes(films){
   return arrDur
 }
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
+function bestYearAvg(films){
+  lastFunction(films)
+  sumaRate(films)
+return films===[]?films:null
+}
+
+function lastFunction(films){
+return films.sort((a,b)=> a.year-b.year)
+}
+function sumaRate(films){
+  let sumaRate=0
+  let arrSumaRate=[]
+  films.sort((a,b)=>{
+    if(a.year===b.year){
+      console.log('year A', a.year, 'year B', b.year)
+      sumaRate+=parseFloat(a.rate)
+      arrSumaRate.push(parseFloat(a.rate))
+      console.log('suma rate',arrSumaRate)
+    }
+    if(a.year<b.year){
+      console.log('sumaRate', sumaRate)
+      sumaRate=0
+      arrSumaRate = []
+      arrSumaRate.push(parseFloat(a.rate))
+      console.log('arrSumaRate', arrSumaRate)
+    }
+    if(a.year>b.year){
+      console.log('sumaRate', sumaRate)
+      sumaRate=0
+      arrSumaRate = []
+      arrSumaRate.push(parseFloat(b.rate))
+      console.log('arrSumaRate', arrSumaRate)
+    }
+  })
+}
