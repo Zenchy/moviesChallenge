@@ -119,37 +119,67 @@ function turnHoursToMinutes(films){
 }
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
 function bestYearAvg(films){
+  let bestPuntuation
+  let filterBest=[]
+  let fin=[]
   lastFunction(films)
-  sumaRate(films)
+  bestPuntuation=sumaRate(films)
+  console.log('this is film+best', films , 'BEEEEEEEEEEEEEEEST',bestPuntuation)
 return films===[]?films:null
 }
 
 function lastFunction(films){
 return films.sort((a,b)=> a.year-b.year)
 }
+
 function sumaRate(films){
   let sumaRate=0
   let arrSumaRate=[]
+  let bestPuntuation=[]
+  let  topPuntuation=0
+  let finalpower=[]
+  let result
+  let punctAndYear
   films.sort((a,b)=>{
     if(a.year===b.year){
-      console.log('year A', a.year, 'year B', b.year)
+      sumaRate=0
+      arrSumaRate=[]
       sumaRate+=parseFloat(a.rate)
       arrSumaRate.push(parseFloat(a.rate))
-      console.log('suma rate',arrSumaRate)
+      result = roundResult(arrSumaRate)
+      bestPuntuation.push(result)
     }
     if(a.year<b.year){
-      console.log('sumaRate', sumaRate)
       sumaRate=0
       arrSumaRate = []
       arrSumaRate.push(parseFloat(a.rate))
-      console.log('arrSumaRate', arrSumaRate)
+      result = roundResult(arrSumaRate)
+      bestPuntuation.push(result)
+
     }
     if(a.year>b.year){
-      console.log('sumaRate', sumaRate)
       sumaRate=0
       arrSumaRate = []
       arrSumaRate.push(parseFloat(b.rate))
-      console.log('arrSumaRate', arrSumaRate)
+      result = roundResult(arrSumaRate)
+      bestPuntuation.push(result)
+    }
+    if(a.year!==b.year){
+      result = roundResult(arrSumaRate)
+      bestPuntuation.push(result)
     }
   })
+   return topPuntuation = Math.max(...bestPuntuation)
+
+
+}
+
+function sumArrayElems(arrToSum){
+  const reducer=(acum, elem)=>acum+elem
+  return Math.round(arrToSum.reduce(reducer)*10)/10
+}
+
+function roundResult(arrSumaRate){
+  const result = Math.round((sumArrayElems(arrSumaRate)/arrSumaRate.length)*100)/100
+  return result
 }
